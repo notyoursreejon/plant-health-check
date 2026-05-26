@@ -507,52 +507,206 @@ plant-health-check/
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Run the Web App Locally (Step-by-Step)
+
+Follow these steps to set up and launch both the **backend** (FastAPI server) and **frontend** (browser UI) on your machine.
 
 ### Prerequisites
 
-- Python 3.8+
-- pip
-
-### Installation
-
-```bash
-# Clone the repo
-git clone https://github.com/notyoursreejon/plant-health-check.git
-cd plant-health-check
-
-# Create virtual environment
-python -m venv venv
-venv\Scripts\activate          # Windows
-# source venv/bin/activate     # Mac/Linux
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Download the Model
-
-Place the trained model file `leaf_disease_model.h5` in the project root directory. Also ensure the test dataset is placed under `data/test/` with class subfolders.
+| Requirement | Minimum Version | Check Command |
+|-------------|----------------|---------------|
+| Python | 3.8+ | `python --version` |
+| pip | 20.0+ | `pip --version` |
+| Git | Any | `git --version` |
 
 ---
 
-## 📖 Usage
+### Step 1 — Clone the Repository
 
-### 🌐 Web Application (Recommended)
+Open a terminal (Command Prompt, PowerShell, or Terminal) and run:
 
 ```bash
-# Start the web server
-python app.py
-
-# Open in browser
-# http://localhost:8000
+git clone https://github.com/notyoursreejon/plant-health-check.git
+cd plant-health-check
 ```
 
-The webapp provides a complete GUI for uploading images, viewing AI predictions with LIME/SHAP explanations, browsing the disease knowledge center, and reviewing past analyses.
+You should now be inside the `plant-health-check/` folder.
 
-### 🖥️ Command-Line Interface
+---
 
-#### Generate Evaluation Metrics
+### Step 2 — Create a Virtual Environment
+
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Mac / Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+> ✅ You should see `(venv)` at the beginning of your terminal prompt. This means the virtual environment is active.
+
+---
+
+### Step 3 — Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs all required packages including:
+- `fastapi` + `uvicorn` — Web server
+- `tensorflow` — Deep learning model
+- `lime` — LIME explainability
+- `shap` — SHAP explainability
+- `matplotlib`, `seaborn`, `scikit-learn`, `scikit-image` — Visualization & ML utilities
+- `numpy`, `pillow` — Image processing
+
+> ⏳ This may take 3-5 minutes on first install (TensorFlow is ~500MB).
+
+---
+
+### Step 4 — Verify the Model File
+
+Make sure the trained model file exists at the project root:
+
+```bash
+# Windows
+dir leaf_disease_model.h5
+
+# Mac / Linux
+ls -lh leaf_disease_model.h5
+```
+
+> ✅ Expected: You should see `leaf_disease_model.h5` (~134 MB).  
+> ❌ If missing: Download or place the trained model file in the project root directory.
+
+Also verify the test dataset exists:
+
+```bash
+# Windows
+dir data\test
+
+# Mac / Linux
+ls data/test/
+```
+
+> ✅ Expected: 39 folders like `Apple___Apple_scab`, `Tomato___Late_blight`, etc.
+
+---
+
+### Step 5 — Start the Backend Server
+
+```bash
+python app.py
+```
+
+You will see the following output in your terminal:
+
+```
+==================================================
+  Plant Health Check — Starting Up
+==================================================
+  [GPU] TensorFlow configuration...
+  [OK] Model loaded successfully
+  Static:  .../static
+  Uploads: .../data/uploads
+  Outputs: .../outputs
+==================================================
+  Ready at http://localhost:8000
+==================================================
+INFO:     Uvicorn running on http://0.0.0.0:8000
+```
+
+> ✅ The backend is now running. **Keep this terminal window open** — closing it will stop the server.  
+> ⚠️ First startup takes ~10-15 seconds because TensorFlow loads the model into memory.
+
+---
+
+### Step 6 — Open the Frontend in Your Browser
+
+Open your web browser (Chrome, Firefox, Edge, etc.) and go to:
+
+```
+http://localhost:8000
+```
+
+That's it — the **frontend is served directly by the backend**. No separate frontend server is needed. You will see the Plant Health Check home page.
+
+---
+
+### Step 7 — Navigate the Web App
+
+Once the app is open in your browser, you can access all pages:
+
+| What to Do | URL | How to Get There |
+|-----------|-----|-----------------|
+| View the home page | `http://localhost:8000` | Click the logo or "Home" in sidebar |
+| Upload a leaf image | `http://localhost:8000/upload` | Click "Analysis" in sidebar or the hero CTA button |
+| View diagnosis results | `http://localhost:8000/results?id=...` | Automatic redirect after upload |
+| Browse disease catalog | `http://localhost:8000/knowledge` | Click "Library" in sidebar |
+| Review past analyses | `http://localhost:8000/history` | Click "Archive" in sidebar |
+| View model metrics | `http://localhost:8000/analytics` | Click "Metrics" in sidebar |
+
+---
+
+### Step 8 — Run Your First Diagnosis
+
+1. Go to **http://localhost:8000/upload**
+2. **Drag and drop** a leaf image (or click the upload zone to select one)
+3. Click **"Begin Analysis"**
+4. Watch the results page update in real-time:
+   - 🟢 **Prediction** appears in ~1 second
+   - 🟡 **LIME explanation** appears in ~10-30 seconds
+   - 🔵 **SHAP explanation** appears in ~1-5 minutes
+
+> 💡 **Tip:** You can use any image from the `data/test/` folder for testing. For example:  
+> `data/test/Tomato___Late_blight/` contains sample tomato late blight images.
+
+---
+
+### Step 9 — Stop the Server
+
+To stop the backend server, go back to the terminal where it's running and press:
+
+```
+Ctrl + C
+```
+
+---
+
+### Quick Reference — All Terminal Commands
+
+```bash
+# 1. Clone
+git clone https://github.com/notyoursreejon/plant-health-check.git
+cd plant-health-check
+
+# 2. Virtual environment
+python -m venv venv
+venv\Scripts\activate              # Windows
+# source venv/bin/activate         # Mac/Linux
+
+# 3. Install
+pip install -r requirements.txt
+
+# 4. Run the web app
+python app.py
+# → Open http://localhost:8000 in your browser
+
+# 5. Stop
+# Press Ctrl+C in the terminal
+```
+
+---
+
+## 📖 Command-Line Interface (Alternative)
+
+If you prefer the terminal over the web UI, you can run the analysis tools directly:
+
+### Generate Evaluation Metrics
 
 ```bash
 python src/generate_metrics.py
@@ -563,7 +717,7 @@ This creates three files:
 - `confusion_matrix_final.png` — Normalized confusion matrix heatmap
 - `precision_recall_curve_multi.png` — Per-class precision-recall curves
 
-#### Run Explainability
+### Run Explainability
 
 ```bash
 # Run both LIME + SHAP (generates comparison too)
@@ -578,7 +732,7 @@ python src/explain.py --image "data/test/Tomato___Late_blight/image.jpg" --shap-
 
 Images auto-open after generation. Outputs are saved to `outputs/lime/`, `outputs/shap/`, `outputs/comparison/`.
 
-#### Quick Tests
+### Quick Tests
 
 ```bash
 # Test if model loads correctly
