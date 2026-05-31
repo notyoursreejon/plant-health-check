@@ -386,42 +386,44 @@ Page load → GET /api/diseases → populate plant dropdown + render grid
 
 ---
 
-## 📸 Results
+## 📸 Results & Model Performance
 
-### Training Performance
-
-| Metric | Value |
-|--------|-------|
-| Training Accuracy | ~96.9% |
-| Validation Accuracy | ~89% |
-| Training Loss | 0.096 |
-| Validation Loss | 0.44 |
-| Classes | 39 |
-| Epochs | 5 |
-| Parameters | ~11.1M |
+### 🌿 Executive Summary Dashboard
+The model performance is summarized in an all-in-one publication-ready diagnostic dashboard. It combines accuracy gauges, loss trend curves, confusion heatmaps, PR distribution curves, top/bottom class F1 scores, and model KPI statistics.
 
 <p align="center">
-  <img src="training_graph.png" alt="Training Loss and Accuracy" width="600"/>
+  <img src="assets/executive_summary_dashboard.png" alt="Executive Summary Dashboard" width="850"/>
 </p>
 
-### Confusion Matrix (Normalized)
-
-The confusion matrix shows how well the model performs across all 39 disease classes. Values on the diagonal represent correct predictions — the darker the color, the better the accuracy for that class.
+### 1. Training Curves (TensorBoard-inspired)
+Shows accuracy (%) on the left axis and categorical crossentropy loss on the right axis across 5 epochs. Includes standard-deviation confidence bounds and best validation markers.
 
 <p align="center">
-  <img src="confusion_matrix_final.png" alt="Confusion Matrix" width="700"/>
+  <img src="assets/training_graph.png" alt="Training Loss and Accuracy" width="600"/>
 </p>
 
-### Precision-Recall Curves
-
-Each curve represents one disease class. A curve closer to the top-right corner means better performance. The **AP (Average Precision)** score next to each class name summarizes overall performance — closer to 1.0 is better.
+### 2. Grouped Confusion Matrix
+Displays normalized recall rates across species-level crop groups to analyze nightshade and pome fruit foliage classification rates.
 
 <p align="center">
-  <img src="precision_recall_curve_multi.png" alt="Precision-Recall Curves" width="700"/>
+  <img src="assets/confusion_matrix_final.png" alt="Grouped Confusion Matrix" width="700"/>
+</p>
+
+### 3. Precision-Recall Curves
+Highlights precision-recall boundaries for the Top 5 performing classes while muting background classes to track mean Average Precision (mAP@50 = 90.2%).
+
+<p align="center">
+  <img src="assets/precision_recall_curve_multi.png" alt="Precision-Recall Curves" width="700"/>
+</p>
+
+### 4. Class F1-Scores Bar Chart
+Horizontal bar chart sorting F1-scores for all 39 classes, flagged with performance thresholds (Optimal, Moderate, and Warning/Underperforming).
+
+<p align="center">
+  <img src="assets/class_performance_bar.png" alt="Class-wise F1 Scores" width="650"/>
 </p>
 
 ### LIME Explanation Example
-
 LIME highlights **which regions of the leaf** the model focuses on to make its prediction. Green boundaries mark areas that **support** the prediction, red areas **contradict** it.
 
 <p align="center">
@@ -461,9 +463,11 @@ plant-health-check/
 ├── app.py                            # FastAPI web server (entry point)
 ├── leaf_disease_model.h5             # Trained CNN model (39 classes)
 ├── requirements.txt                  # Python dependencies
-├── training_graph.png                # Training loss/accuracy plot
-├── confusion_matrix_final.png        # Normalized confusion matrix
-├── precision_recall_curve_multi.png  # Per-class PR curves
+├── training_graph.png                # Training loss/accuracy plot (PNG, PDF, SVG)
+├── confusion_matrix_final.png        # Normalized confusion matrix (PNG, PDF, SVG)
+├── precision_recall_curve_multi.png  # Per-class PR curves (PNG, PDF, SVG)
+├── class_performance_bar.png         # Class F1-score horizontal bar chart (PNG, PDF, SVG)
+├── executive_summary_dashboard.png   # All-in-one executive summary dashboard (PNG, PDF, SVG)
 │
 ├── static/                           # Frontend assets
 │   ├── css/
@@ -502,7 +506,13 @@ plant-health-check/
 │   ├── shap/                         # SHAP explanation PNGs
 │   └── comparison/                   # Side-by-side comparison PNGs
 │
-└── assets/                           # Images used in README
+└── assets/                           # Image assets (PNG format only) used directly in README
+    ├── training_graph.png
+    ├── confusion_matrix_final.png
+    ├── precision_recall_curve_multi.png
+    ├── class_performance_bar.png
+    ├── executive_summary_dashboard.png
+    └── lime_example.png
 ```
 
 ---
