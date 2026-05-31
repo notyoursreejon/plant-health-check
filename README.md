@@ -430,6 +430,13 @@ LIME highlights **which regions of the leaf** the model focuses on to make its p
   <img src="assets/lime_example.png" alt="LIME Explanation" width="800"/>
 </p>
 
+### SHAP Explanation Example
+SHAP displays a pixel-level signed attribution heatmap using Shapley values. Red pixels **support** the predicted class, while blue pixels **oppose** it.
+
+<p align="center">
+  <img src="assets/shap_example.png" alt="SHAP Explanation" width="800"/>
+</p>
+
 ---
 
 ## 🧠 How It Works
@@ -512,7 +519,8 @@ plant-health-check/
     ├── precision_recall_curve_multi.png
     ├── class_performance_bar.png
     ├── executive_summary_dashboard.png
-    └── lime_example.png
+    ├── lime_example.png
+    └── shap_example.png
 ```
 
 ---
