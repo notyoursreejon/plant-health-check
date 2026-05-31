@@ -570,8 +570,10 @@ source venv/bin/activate
 
 ### Step 3 — Install Dependencies
 
+> ⚠️ **Windows Encoding Note**: The `requirements.txt` file has been saved in UTF-8 format to prevent common installation decoding errors (like `UnicodeDecodeError` or parser failures). Make sure your virtual environment is active and use python's runner for pip:
+
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 This installs all required packages including:
@@ -708,7 +710,7 @@ venv\Scripts\activate              # Windows
 # source venv/bin/activate         # Mac/Linux
 
 # 3. Install
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 # 4. Run the web app
 python app.py
