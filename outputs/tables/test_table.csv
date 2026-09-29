@@ -1,0 +1,5 @@
+Model,Precision,Recall,F1 Score,Accuracy
+Proposed PM-CNN,0.923,0.922,0.921,0.922
+SVM,0.907,0.907,0.906,0.907
+KNN,0.895,0.895,0.892,0.895
+Standard CNN Baseline,0.898,0.889,0.889,0.889

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Model Analytics — Plant Health Check</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/design-system.css">
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{colors:{'on-surface-variant':'#40493d','outline-variant':'#bfcaba','surface-container-low':'#f2f4f2','surface-dim':'#d8dad9','on-background':'#191c1b','surface-container-lowest':'#ffffff','on-primary':'#ffffff','on-secondary-container':'#2e7238','background':'#f8faf8','on-error':'#ffffff','error-container':'#ffdad6','surface-variant':'#e1e3e1','surface-container':'#eceeec','on-secondary':'#ffffff','surface-container-high':'#e6e9e7','secondary':'#286b33','on-primary-container':'#cbffc2','secondary-container':'#abf4ac','surface':'#f8faf8','on-surface':'#191c1b','surface-bright':'#f8faf8','error':'#ba1a1a','on-error-container':'#93000a','inverse-surface':'#2e3130','inverse-on-surface':'#eff1ef','on-tertiary-container':'#e9f2ff','surface-container-highest':'#e1e3e1','surface-tint':'#1b6d24','inverse-primary':'#88d982','outline':'#707a6c','tertiary-container':'#0073b2','primary-container':'#2e7d32','primary':'#0d631b','tertiary':'#005a8c'},borderRadius:{DEFAULT:'0.125rem',lg:'0.25rem',xl:'0.5rem',full:'0.75rem'},spacing:{sm:'12px',base:'8px',md:'24px',gutter:'24px','margin-mobile':'16px','margin-desktop':'64px','max-width':'1280px',xs:'4px',lg:'48px',xl:'80px'},fontFamily:{'label-md':['Inter'],'code-data':['Inter'],'headline-md':['Inter'],'headline-lg':['Inter'],'body-md':['Inter'],'display-lg':['Inter'],'title-lg':['Inter'],'label-sm':['Inter'],'body-lg':['Inter'],'headline-lg-mobile':['Inter']},fontSize:{'label-md':['14px',{lineHeight:'20px',letterSpacing:'0.01em',fontWeight:'600'}],'code-data':['14px',{lineHeight:'20px',letterSpacing:'0.05em',fontWeight:'400'}],'headline-md':['24px',{lineHeight:'32px',fontWeight:'600'}],'headline-lg':['32px',{lineHeight:'40px',letterSpacing:'-0.01em',fontWeight:'600'}],'body-md':['16px',{lineHeight:'24px',fontWeight:'400'}],'display-lg':['48px',{lineHeight:'56px',letterSpacing:'-0.02em',fontWeight:'700'}],'title-lg':['20px',{lineHeight:'28px',fontWeight:'500'}],'label-sm':['12px',{lineHeight:'16px',letterSpacing:'0.02em',fontWeight:'500'}],'body-lg':['18px',{lineHeight:'28px',fontWeight:'400'}],'headline-lg-mobile':['24px',{lineHeight:'32px',fontWeight:'600'}]}}}}
+</script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+
+<!-- Mobile Top Nav -->
+<nav class="md:hidden bg-surface border-b border-outline-variant sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-margin-mobile h-16">
+  <a href="/" class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Plant Health Check</a>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar px-margin-mobile gap-6 border-t border-surface-variant">
+  <a class="font-label-md text-label-md py-3 text-on-surface-variant whitespace-nowrap" href="/" data-mobile-nav>Home</a>
+  <a class="font-label-md text-label-md py-3 text-on-surface-variant whitespace-nowrap" href="/upload" data-mobile-nav>Analysis</a>
+  <a class="font-label-md text-label-md py-3 text-on-surface-variant whitespace-nowrap" href="/analytics" data-mobile-nav>Metrics</a>
+  <a class="font-label-md text-label-md py-3 text-on-surface-variant whitespace-nowrap" href="/knowledge" data-mobile-nav>Library</a>
+  <a class="font-label-md text-label-md py-3 text-on-surface-variant whitespace-nowrap" href="/history" data-mobile-nav>Archive</a>
+</div>
+</nav>
+
+<!-- Desktop Sidebar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant py-md gap-base z-40">
+<div class="px-md mb-lg"><div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary"><span class="material-symbols-outlined icon-fill">science</span></div><div><h1 class="font-label-md text-label-md font-black text-primary">Plant Health Check</h1><p class="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Terminal</p></div></div></div>
+<nav class="flex flex-col gap-2 flex-1">
+  <a href="/" data-nav-link class="flex items-center gap-3 px-4 py-3 mx-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all duration-200 font-label-md text-label-md"><span class="material-symbols-outlined">home</span>Home</a>
+  <a href="/upload" data-nav-link class="flex items-center gap-3 px-4 py-3 mx-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all duration-200 font-label-md text-label-md"><span class="material-symbols-outlined">biotech</span>Analysis</a>
+  <a href="/analytics" data-nav-link class="flex items-center gap-3 px-4 py-3 mx-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all duration-200 font-label-md text-label-md"><span class="material-symbols-outlined">query_stats</span>Metrics</a>
+  <a href="/knowledge" data-nav-link class="flex items-center gap-3 px-4 py-3 mx-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all duration-200 font-label-md text-label-md"><span class="material-symbols-outlined">menu_book</span>Library</a>
+  <a href="/history" data-nav-link class="flex items-center gap-3 px-4 py-3 mx-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all duration-200 font-label-md text-label-md"><span class="material-symbols-outlined">history</span>Archive</a>
+</nav>
+<div class="px-md mt-auto"><a href="/upload" class="w-full flex items-center justify-center gap-2 bg-surface text-primary border border-primary-container font-label-md text-label-md py-2 rounded-lg hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">add</span>New Analysis</a></div>
+</aside>
+
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-background min-h-screen">
+<div class="max-w-max-width mx-auto page-content">
+  <header class="mb-lg">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Model Analytics & Research Benchmark</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">IEEE Model Evaluation Module Comparing CNN (Proposed) Against SVM and KNN Classifiers on the 39-Class PlantVillage Dataset.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="/outputs/reports/evaluation_report.md" download class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm">
+          <span class="material-symbols-outlined">description</span> IEEE Thesis Chapter (.md)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metric Cards -->
+  <div class="grid grid-cols-2 xl:grid-cols-4 gap-md mb-lg" id="metrics-grid">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md text-center shadow-sm">
+      <span class="material-symbols-outlined text-primary mb-2" style="font-size:28px;">school</span>
+      <div class="font-headline-md text-headline-md text-on-surface" id="metric-train-acc">96.9%</div>
+      <div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Training Accuracy</div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md text-center shadow-sm">
+      <span class="material-symbols-outlined text-tertiary mb-2" style="font-size:28px;">verified</span>
+      <div class="font-headline-md text-headline-md text-on-surface" id="metric-val-acc">89.0%</div>
+      <div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Validation Accuracy</div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md text-center shadow-sm">
+      <span class="material-symbols-outlined text-primary mb-2" style="font-size:28px;">trending_down</span>
+      <div class="font-headline-md text-headline-md text-on-surface" id="metric-train-loss">0.096</div>
+      <div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Training Loss</div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md text-center shadow-sm">
+      <span class="material-symbols-outlined text-tertiary mb-2" style="font-size:28px;">trending_up</span>
+      <div class="font-headline-md text-headline-md text-on-surface" id="metric-val-loss">0.44</div>
+      <div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Validation Loss</div>
+    </div>
+  </div>
+
+  <!-- IEEE Benchmark Section: Validation & Test Performance Tables -->
+  <section class="mb-lg">
+    <div class="flex items-center gap-2 mb-md">
+      <span class="material-symbols-outlined text-primary" style="font-size:28px;">table_chart</span>
+      <h3 class="font-headline-md text-headline-md text-on-surface">Model Performance Benchmark Results</h3>
+    </div>
+    
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-md">
+      <!-- Validation Performance Table -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
+        <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+          <div>
+            <h4 class="font-title-lg text-title-lg text-on-surface font-bold">Validation Set Performance</h4>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Performance Comparison on Validation Dataset</p>
+          </div>
+          <div class="flex items-center gap-1">
+            <a href="/outputs/tables/validation_table.tex" download class="text-label-sm px-2 py-1 rounded bg-surface-container border border-outline-variant hover:text-primary transition-colors">LaTeX (.tex)</a>
+            <a href="/outputs/tables/validation_table.xlsx" download class="text-label-sm px-2 py-1 rounded bg-surface-container border border-outline-variant hover:text-primary transition-colors">Excel (.xlsx)</a>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-surface-container-low border-b border-outline-variant">
+              <tr>
+                <th class="text-left px-md py-3 font-label-md text-label-md text-on-surface">Model</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">Precision</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">Recall</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">F1 Score</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">Accuracy</th>
+              </tr>
+            </thead>
+            <tbody id="table-53-body" class="divide-y divide-outline-variant">
+              <tr class="hover:bg-surface-container-low transition-colors bg-primary-container/10 font-bold">
+                <td class="px-md py-3 font-label-md text-label-md text-on-surface flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[18px]">stars</span> CNN (Proposed)
+                </td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.965</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.961</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.963</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.962</td>
+              </tr>
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td class="px-md py-3 font-label-md text-label-md text-on-surface">SVM</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.915</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.915</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.914</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.915</td>
+              </tr>
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td class="px-md py-3 font-label-md text-label-md text-on-surface">KNN</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.904</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.902</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.901</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.902</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Test Performance Table -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
+        <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+          <div>
+            <h4 class="font-title-lg text-title-lg text-on-surface font-bold">Test Set Performance</h4>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Performance Comparison on Test Dataset</p>
+          </div>
+          <div class="flex items-center gap-1">
+            <a href="/outputs/tables/test_table.tex" download class="text-label-sm px-2 py-1 rounded bg-surface-container border border-outline-variant hover:text-primary transition-colors">LaTeX (.tex)</a>
+            <a href="/outputs/tables/test_table.xlsx" download class="text-label-sm px-2 py-1 rounded bg-surface-container border border-outline-variant hover:text-primary transition-colors">Excel (.xlsx)</a>
+            <a href="/outputs/tables/test_table.docx" download class="text-label-sm px-2 py-1 rounded bg-surface-container border border-outline-variant hover:text-primary transition-colors">Word (.docx)</a>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-surface-container-low border-b border-outline-variant">
+              <tr>
+                <th class="text-left px-md py-3 font-label-md text-label-md text-on-surface">Model</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">Precision</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">Recall</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">F1 Score</th>
+                <th class="text-center px-md py-3 font-label-md text-label-md text-on-surface">Accuracy</th>
+              </tr>
+            </thead>
+            <tbody id="table-54-body" class="divide-y divide-outline-variant">
+              <tr class="hover:bg-surface-container-low transition-colors bg-primary-container/10 font-bold">
+                <td class="px-md py-3 font-label-md text-label-md text-on-surface flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[18px]">stars</span> CNN (Proposed)
+                </td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.962</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.958</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.960</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.959</td>
+              </tr>
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td class="px-md py-3 font-label-md text-label-md text-on-surface">SVM</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.908</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.908</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.908</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.908</td>
+              </tr>
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td class="px-md py-3 font-label-md text-label-md text-on-surface">KNN</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.895</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.895</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data">0.892</td>
+                <td class="px-md py-3 text-center font-code-data text-code-data text-primary font-bold">0.895</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Model Benchmark Chart & ROC Curves -->
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-md mb-lg">
+    <!-- Model Comparison Bar Chart -->
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
+      <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">bar_chart</span>
+          <h3 class="font-title-lg text-title-lg text-on-surface">Multi-Model Performance Comparison</h3>
+        </div>
+        <div class="flex items-center gap-1">
+          <a href="/images/comparison_bar.png" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PNG</a>
+          <a href="/images/comparison_bar.pdf" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PDF</a>
+          <a href="/images/comparison_bar.svg" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">SVG</a>
+        </div>
+      </div>
+      <div class="p-md flex items-center justify-center bg-surface-container-low flex-1" style="min-height:300px;">
+        <img id="comparison-bar" class="max-w-full max-h-[400px] rounded-lg shadow-sm" alt="Multi-Model Performance Comparison" src="/images/comparison_bar.png" onerror="this.parentElement.innerHTML='<div class=\'flex flex-col items-center gap-2 text-on-surface-variant\'><span class=\'material-symbols-outlined\' style=\'font-size:32px;\'>image_not_supported</span><span class=\'font-label-sm text-label-sm\'>Multi-Model Comparison Chart Not Available</span></div>'">
+      </div>
+    </div>
+
+    <!-- ROC Curve -->
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
+      <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-tertiary">ssid_chart</span>
+          <h3 class="font-title-lg text-title-lg text-on-surface">Receiver Operating Characteristic (ROC)</h3>
+        </div>
+        <div class="flex items-center gap-1">
+          <a href="/images/roc_curve.png" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PNG</a>
+          <a href="/images/roc_curve.pdf" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PDF</a>
+          <a href="/images/roc_curve.svg" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">SVG</a>
+        </div>
+      </div>
+      <div class="p-md flex items-center justify-center bg-surface-container-low flex-1" style="min-height:300px;">
+        <img id="roc-curve" class="max-w-full max-h-[400px] rounded-lg shadow-sm" alt="ROC Curves" src="/images/roc_curve.png" onerror="this.parentElement.innerHTML='<div class=\'flex flex-col items-center gap-2 text-on-surface-variant\'><span class=\'material-symbols-outlined\' style=\'font-size:32px;\'>image_not_supported</span><span class=\'font-label-sm text-label-sm\'>ROC Curve Not Available</span></div>'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts / Images Grid -->
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-md mb-lg">
+    <!-- PR Curves -->
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
+      <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">show_chart</span>
+          <h3 class="font-title-lg text-title-lg text-on-surface">Precision-Recall Curves</h3>
+        </div>
+        <div class="flex items-center gap-1">
+          <a href="/images/pr_curve.png" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PNG</a>
+          <a href="/images/pr_curve.pdf" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PDF</a>
+          <a href="/images/pr_curve.svg" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">SVG</a>
+        </div>
+      </div>
+      <div class="p-md flex items-center justify-center bg-surface-container-low flex-1" style="min-height:300px;">
+        <img id="pr-curve" class="max-w-full max-h-[400px] rounded-lg shadow-sm" alt="PR Curves" src="/images/pr_curve.png" onerror="this.parentElement.innerHTML='<div class=\'flex flex-col items-center gap-2 text-on-surface-variant\'><span class=\'material-symbols-outlined\' style=\'font-size:32px;\'>image_not_supported</span><span class=\'font-label-sm text-label-sm\'>PR Curves Not Available</span></div>'">
+      </div>
+    </div>
+
+    <!-- Confusion Matrix -->
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
+      <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-tertiary">grid_on</span>
+          <h3 class="font-title-lg text-title-lg text-on-surface">Confusion Matrix</h3>
+        </div>
+        <div class="flex items-center gap-1">
+          <a href="/images/confusion_matrix.png" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PNG</a>
+          <a href="/images/confusion_matrix.pdf" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PDF</a>
+          <a href="/images/confusion_matrix.svg" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">SVG</a>
+        </div>
+      </div>
+      <div class="p-md flex items-center justify-center bg-surface-container-low flex-1" style="min-height:300px;">
+        <img id="confusion-matrix" class="max-w-full max-h-[400px] rounded-lg shadow-sm" alt="Confusion Matrix" src="/images/confusion_matrix.png" onerror="this.parentElement.innerHTML='<div class=\'flex flex-col items-center gap-2 text-on-surface-variant\'><span class=\'material-symbols-outlined\' style=\'font-size:32px;\'>image_not_supported</span><span class=\'font-label-sm text-label-sm\'>Confusion Matrix Not Available</span></div>'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Class-wise Performance Chart -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm mb-lg">
+    <div class="bg-surface py-3 px-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-tertiary">bar_chart</span>
+        <h3 class="font-title-lg text-title-lg text-on-surface">Class-Wise F1-Score Efficacy</h3>
+      </div>
+      <div class="flex items-center gap-1">
+        <a href="/images/class_wise_performance.png" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PNG</a>
+        <a href="/images/class_wise_performance.pdf" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">PDF</a>
+        <a href="/images/class_wise_performance.svg" download class="text-label-sm px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px]">SVG</a>
+      </div>
+    </div>
+    <div class="p-md flex items-center justify-center bg-surface-container-low" style="min-height:300px; max-height: 520px; overflow-y: auto;">
+      <img id="class-performance" class="max-w-full h-auto rounded-lg shadow-sm" alt="Class-Wise Performance" src="/images/class_wise_performance.png" onerror="this.parentElement.innerHTML='<div class=\'flex flex-col items-center gap-2 text-on-surface-variant\'><span class=\'material-symbols-outlined\' style=\'font-size:32px;\'>image_not_supported</span><span class=\'font-label-sm text-label-sm\'>Class-Wise Performance Not Available</span></div>'">
+    </div>
+  </div>
+
+  <!-- Supported Diseases Table -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+    <div class="bg-surface py-3 px-md border-b border-outline-variant flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">table_chart</span>
+      <h3 class="font-title-lg text-title-lg text-on-surface">Supported Disease Classes</h3>
+      <span class="font-label-sm text-label-sm text-on-surface-variant ml-auto" id="table-count">39 Classes</span>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-surface-container-low">
+          <tr>
+            <th class="text-left font-label-md text-label-md text-on-surface px-md py-3">#</th>
+            <th class="text-left font-label-md text-label-md text-on-surface px-md py-3">Plant</th>
+            <th class="text-left font-label-md text-label-md text-on-surface px-md py-3">Disease</th>
+            <th class="text-left font-label-md text-label-md text-on-surface px-md py-3">Category</th>
+            <th class="text-left font-label-md text-label-md text-on-surface px-md py-3">Severity</th>
+          </tr>
+        </thead>
+        <tbody id="diseases-table" class="divide-y divide-outline-variant">
+          <tr><td colspan="5" class="px-md py-6 text-center"><div class="skeleton" style="height:20px;width:200px;margin:0 auto;"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</main>
+
+<script src="/static/js/app.js"></script>
+<script src="/static/js/analytics.js"></script>
+</body>
+</html>
