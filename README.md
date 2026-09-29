@@ -21,6 +21,23 @@ A full-stack web application that **classifies plant leaf diseases** into **39 c
 
 ---
 
+## 🖼️ Dashboard & Explainability Visualizations
+
+### Executive Summary Dashboard
+<p align="center">
+  <img src="assets/executive_summary_dashboard.png" alt="Executive Summary Dashboard" width="850"/>
+</p>
+
+### Model Explainability (LIME & SHAP)
+<p align="center">
+  <img src="assets/lime_example.png" alt="LIME Superpixel Explanation" width="800"/>
+</p>
+<p align="center">
+  <img src="assets/shap_example.png" alt="SHAP Shapley Attribution Map" width="800"/>
+</p>
+
+---
+
 ## 🏛️ IEEE Research Paper 4-Model Evaluation & Benchmark
 
 The project includes an integrated **Model Evaluation & Research Benchmark System** (`main_evaluation.py`) designed to match rigorous academic IEEE paper standards.
@@ -58,6 +75,37 @@ The project includes an integrated **Model Evaluation & Research Benchmark Syste
 | **Total Parameters** | 11,173,991 (11.17M) | **1,703,015 (1.70M)** | **84.8% Parameter Reduction** |
 | **Channel Attention** | None | **Squeeze-and-Excitation (SE)** | Architectural Feature Added |
 | **Test Set Accuracy** | 88.9% | **92.2%** | **+3.3% Accuracy Boost** |
+
+---
+
+## 📊 Publication-Quality Figures (300 DPI)
+
+### Multi-Model Performance Metric Comparison
+<p align="center">
+  <img src="outputs/plots/comparison_bar.png" alt="Multi-Model Metric Comparison Bar Chart" width="750"/>
+</p>
+
+### Receiver Operating Characteristic (ROC) 4-Model Comparison
+<p align="center">
+  <img src="outputs/plots/roc_curve.png" alt="ROC Curves 4-Model Comparison" width="750"/>
+</p>
+
+### Precision-Recall (PR) Curves & Normalized Confusion Matrix
+<p align="center">
+  <img src="outputs/plots/pr_curve.png" alt="Precision-Recall Curves" width="700"/>
+</p>
+<p align="center">
+  <img src="outputs/plots/confusion_matrix.png" alt="Normalized Confusion Matrix" width="750"/>
+</p>
+
+### Training History & Per-Class F1 Scores
+<p align="center">
+  <img src="outputs/plots/accuracy_curve.png" alt="Training Accuracy Curve" width="600"/>
+  <img src="outputs/plots/loss_curve.png" alt="Training Loss Curve" width="600"/>
+</p>
+<p align="center">
+  <img src="outputs/plots/class_wise_performance.png" alt="Per-Class F1 Performance" width="700"/>
+</p>
 
 ---
 
